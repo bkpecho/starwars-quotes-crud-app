@@ -13,6 +13,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
     const quotesCollection = db.collection('quotes');
     app.set('view engine', 'ejs');
     app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(express.static('public'));
     app.get('/', (req, res) => {
       quotesCollection
         .find()
