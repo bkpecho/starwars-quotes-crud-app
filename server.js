@@ -19,9 +19,9 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
         .toArray()
         .then((results) => {
           console.log(results);
+          res.render('index.ejs', { quotes: results });
         })
         .catch((error) => console.log(error));
-      res.sendFile(__dirname + '/index.html');
     });
 
     app.post('/quotes', (req, res) => {
