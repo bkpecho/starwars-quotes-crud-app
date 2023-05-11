@@ -14,6 +14,14 @@
       <button type="submit">Submit</button>
     </form>
 
-    <%= quotes %>
+    <h2>Quotes</h2>
+    <ul class="quotes">
+      <% for(let i = 0; i < quotes.length; i++) {%>
+      <li class="quote">
+        <span><%= quotes[i].name %></span>:
+        <span><%= quotes[i].quote %></span>
+      </li>
+      <% } %>
+    </ul>
   </body>
 </html>
