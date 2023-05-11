@@ -11,14 +11,14 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
     const db = client.db('star-wars-quotes');
 
     const quotesCollection = db.collection('quotes');
-
+    app.set('view engine', 'ejs');
     app.use(bodyParser.urlencoded({ extended: true }));
     app.get('/', (req, res) => {
       quotesCollection
         .find()
         .toArray()
         .then((results) => {
-          console.log(results[0]);
+          console.log(results);
         })
         .catch((error) => console.log(error));
       res.sendFile(__dirname + '/index.html');
