@@ -2,8 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
+const connectionString = 'mongodb+srv://bkpecho:LZP2c6jBRMfvlvS8@cluster0.ef2gdjb.mongodb.net/?retryWrites=true&w=majority'
 
-MongoClient.connect('mongodb-connection-string', (err, client) => {});
+MongoClient.connect(connectionString, { useUnifiedTopology: true })
+  .then(client => {
+    console.log('Connected to Database')
+  })
+  .catch(error => console.error(error))
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
