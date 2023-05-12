@@ -14,6 +14,8 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
     app.set('view engine', 'ejs');
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(express.static('public'));
+    app.use(bodyParser.json());
+
     app.get('/', (req, res) => {
       quotesCollection
         .find()
@@ -33,6 +35,10 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
           console.log(result);
         })
         .catch((error) => console.log(error));
+    });
+
+    app.put('/quotes', (req, res) => {
+      console.log(req.body);
     });
 
     app.listen(3000, function () {
