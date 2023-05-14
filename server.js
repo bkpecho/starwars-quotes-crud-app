@@ -50,9 +50,13 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
           { upsert: true }
         )
         .then((result) => {
-          console.log(result);
+          const updatedDocument = result.value;
+          res.json(updatedDocument);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+          res.sendStatus(500);
+        });
     });
 
     app.listen(3000, function () {

@@ -1,4 +1,4 @@
-const update = document.querySelector('#update-button');
+const update = document.getElementById('update-button');
 
 update.addEventListener('click', () => {
   fetch('/quotes', {
@@ -10,13 +10,17 @@ update.addEventListener('click', () => {
     })
   })
     .then((res) => {
-      if (res.ok) return res.json();
+      if (res.ok) {
+        return res.json();
+      } else {
+        console.log('Network response was not OK');
+        throw new Error('Network response was not OK');
+      }
     })
     .then((response) => {
-      console.log(response);
-      window.location.reload(true);
+      window.location.reload();
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
     });
 });
