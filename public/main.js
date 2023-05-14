@@ -1,4 +1,5 @@
 const update = document.getElementById('update-button');
+const deleteButton = document.querySelector('#delete-button');
 
 update.addEventListener('click', () => {
   fetch('/quotes', {
@@ -22,5 +23,21 @@ update.addEventListener('click', () => {
     })
     .catch((error) => {
       console.error(error);
+    });
+});
+
+deleteButton.addEventListener('click', (_) => {
+  fetch('/quotes', {
+    method: 'delete',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: 'Darth Vader'
+    })
+  })
+    .then((res) => {
+      if (res.ok) return res.json();
+    })
+    .then((data) => {
+      window.location.reload();
     });
 });
