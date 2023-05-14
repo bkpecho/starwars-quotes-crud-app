@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { reset } = require('nodemon');
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const connectionString =
@@ -57,6 +58,15 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
           console.log(error);
           res.sendStatus(500);
         });
+    });
+
+    app.delete('/quotes', (req, res) => {
+      quotesCollection
+        .deleteOne({ name: req.body.name })
+        .then((result) => {
+          res.json("Deleted Darth Vader's Quote");
+        })
+        .catch((error) => console.log(error));
     });
 
     app.listen(3000, function () {
